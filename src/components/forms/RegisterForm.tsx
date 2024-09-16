@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
-import { signInAction, SignInState } from "@/lib/validation";
+import { signUpAction, SignUpState } from "@/lib/validation";
 import { Button, Label, TextInput } from "flowbite-react";
 
 function SubmitButton() {
@@ -10,17 +10,34 @@ function SubmitButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Logging in..." : "Sign In"}
+      {pending ? "Logging in..." : "Sign Up"}
     </Button>
   );
 }
 
-export default function LoginForm() {
-  const initialState: SignInState = {};
-  const [state, formAction] = useFormState(signInAction, initialState);
+export default function RegisterForm() {
+  const initialState: SignUpState = {};
+  const [state, formAction] = useFormState(signUpAction, initialState);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
+      <div>
+        <div className="block">
+          <Label htmlFor="fullname" value="Fullname" />
+        </div>
+
+        <TextInput
+          id="fullname"
+          name="fullname"
+          type="text"
+          placeholder="Enter your fullname"
+        />
+        {state.errors?.fullname && (
+          <p style={{ color: "red" }} className="text-xs">
+            {state.errors.fullname}
+          </p>
+        )}
+      </div>
       <div>
         <div className="block">
           <Label htmlFor="email" value="Email" />
@@ -46,11 +63,27 @@ export default function LoginForm() {
           id="password"
           name="password"
           type="password"
-          placeholder="Confirm your password"
+          placeholder="Enter your password"
         />
         {state.errors?.password && (
           <p style={{ color: "red" }} className="text-xs">
             {state.errors.password}
+          </p>
+        )}
+      </div>
+      <div>
+        <div className="block">
+          <Label htmlFor="confirmPassword" value="Confirm password" />
+        </div>
+        <TextInput
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm your password"
+        />
+        {state.errors?.confirmPassword && (
+          <p style={{ color: "red" }} className="text-xs">
+            {state.errors.confirmPassword}
           </p>
         )}
       </div>
