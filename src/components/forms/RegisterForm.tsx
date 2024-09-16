@@ -1,41 +1,41 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
-import { signUpAction, SignUpState } from "@/lib/validation";
 import { Button, Label, TextInput } from "flowbite-react";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? "Logging in..." : "Sign Up"}
-    </Button>
-  );
-}
+import { SubmitHandler, useForm } from "react-hook-form";
+import { SignUpFormFields, signUpSchema } from "@/lib/form/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RegisterForm() {
-  const initialState: SignUpState = {};
-  const [state, formAction] = useFormState(signUpAction, initialState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormFields>({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(data);
+  };
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div>
         <div className="block">
           <Label htmlFor="fullname" value="Fullname" />
         </div>
 
         <TextInput
+          {...register("fullname")}
           id="fullname"
           name="fullname"
           type="text"
           placeholder="Enter your fullname"
         />
-        {state.errors?.fullname && (
-          <p style={{ color: "red" }} className="text-xs">
-            {state.errors.fullname}
-          </p>
+        {errors.fullname && (
+          <p className="text-xs text-red-500 mt-1">{errors.fullname.message}</p>
         )}
       </div>
       <div>
@@ -44,15 +44,14 @@ export default function RegisterForm() {
         </div>
 
         <TextInput
+          {...register("email")}
           id="email"
           name="email"
           type="email"
           placeholder="youremail@gmail.com"
         />
-        {state.errors?.email && (
-          <p style={{ color: "red" }} className="text-xs">
-            {state.errors.email}
-          </p>
+        {errors.email && (
+          <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
         )}
       </div>
       <div>
@@ -60,15 +59,14 @@ export default function RegisterForm() {
           <Label htmlFor="password" value="Password" />
         </div>
         <TextInput
+          {...register("password")}
           id="password"
           name="password"
           type="password"
           placeholder="Enter your password"
         />
-        {state.errors?.password && (
-          <p style={{ color: "red" }} className="text-xs">
-            {state.errors.password}
-          </p>
+        {errors.password && (
+          <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
         )}
       </div>
       <div>
@@ -76,27 +74,21 @@ export default function RegisterForm() {
           <Label htmlFor="confirmPassword" value="Confirm password" />
         </div>
         <TextInput
+          {...register("confirmPassword")}
           id="confirmPassword"
           name="confirmPassword"
           type="password"
           placeholder="Confirm your password"
         />
-        {state.errors?.confirmPassword && (
-          <p style={{ color: "red" }} className="text-xs">
-            {state.errors.confirmPassword}
+        {errors.confirmPassword && (
+          <p className="text-xs text-red-500 mt-1">
+            {errors.confirmPassword.message}
           </p>
         )}
       </div>
-      <SubmitButton />
-      {state.message && (
-        <p
-          style={{
-            color: state.message.includes("successful") ? "green" : "red",
-          }}
-        >
-          {state.message}
-        </p>
-      )}
+      <Button disabled={isSubmitting} type="submit">
+        {isSubmitting ? "Loading..." : "Sign In"}
+      </Button>
     </form>
   );
 }
