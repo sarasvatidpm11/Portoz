@@ -1,55 +1,62 @@
 "use client";
-
-import { useFormState } from "react-dom";
-import { useFormStatus } from "react-dom";
-import { signInAction, SignInState } from "@/lib/validation";
 import { Button, Label, TextInput } from "flowbite-react";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? "Logging in..." : "Sign In"}
-    </Button>
-  );
-}
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { signInSchema, FormFields } from "@/lib/form/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginForm() {
-  const initialState: SignInState = {};
-  const [state, formAction] = useFormState(signInAction, initialState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    resolver: zodResolver(signInSchema)
+  });
+
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(data);
+  };
+
+  // console.log(isSubmitting)
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form action="" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div>
         <div className="mb-2 block">
           <Label htmlFor="email" value="Your email" />
         </div>
+        <TextInput
+          {...register("email")}
+          id="email"
+          name="email"
+          type="email"
+          placeholder="youremail@gmail.com"
+        />
+        {errors.email && (
+          <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-        <TextInput id="email" name="email" type="email" placeholder="youremail@gmail.com"  />
-        {state.errors?.email && (
-          <p style={{ color: "red" }} className="text-xs">{state.errors.email}</p>
-        )}
-      </div>
       <div>
-      <div className="mb-2 block">
-            <Label htmlFor="password" value="Your password" />
-          </div>
-          <TextInput id="password" name="password" type="password"  />
-        {state.errors?.password && (
-          <p style={{ color: "red" }} className="text-xs">{state.errors.password}</p>
+        <div className="mb-2 block">
+          <Label htmlFor="password" value="Your password" />
+        </div>
+        <TextInput
+          {...register("password")}
+          id="password"
+          name="password"
+          type="password"
+        />
+        {errors.password && (
+          <p style={{ color: "red" }} className="text-xs">
+            {errors.password.message}
+          </p>
         )}
       </div>
-      <SubmitButton />
-      {state.message && (
-        <p
-          style={{
-            color: state.message.includes("successful") ? "green" : "red",
-          }}
-        >
-          {state.message}
-        </p>
-      )}
+
+      <Button disabled={isSubmitting} type="submit">{isSubmitting ? "Loading..." : "Sign In"}</Button>
     </form>
   );
 }
+
