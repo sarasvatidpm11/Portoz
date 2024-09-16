@@ -29,8 +29,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-cyan-700`}
       >
-        <Navigationbar/>
-        <main className="bg-cyan-700">{children}</main>
+        <Navigationbar></Navigationbar>
+        <main>{children}</main>
       </body>
     </html>
   );

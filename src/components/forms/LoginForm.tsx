@@ -23,8 +23,8 @@ export default function LoginForm() {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email" value="Your email" />
+        <div className="block">
+          <Label htmlFor="email" value="Email" />
         </div>
         <TextInput
           {...register("email")}
@@ -40,7 +40,7 @@ export default function LoginForm() {
 
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password" value="Your password" />
+          <Label htmlFor="password" value="Password" />
         </div>
         <TextInput
           {...register("password")}
