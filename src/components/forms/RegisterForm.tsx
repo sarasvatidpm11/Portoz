@@ -1,22 +1,10 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
-import { signUpAction, SignUpState } from "@/lib/validation";
 import { Button, Label, TextInput } from "flowbite-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpFormFields, signUpSchema } from "@/lib/form/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? "Logging in..." : "Sign Up"}
-    </Button>
-  );
-}
 
 export default function RegisterForm() {
   const {
