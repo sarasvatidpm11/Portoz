@@ -1,7 +1,7 @@
 "use client";
 import { Button, Label, TextInput } from "flowbite-react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
-import { signInSchema, FormFields } from "@/lib/form/validation";
+import { signInSchema, SignInFormFields } from "@/lib/form/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginForm() {
@@ -9,11 +9,11 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormFields>({
+  } = useForm<SignInFormFields>({
     resolver: zodResolver(signInSchema)
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<SignInFormFields> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
   };
@@ -47,6 +47,7 @@ export default function LoginForm() {
           id="password"
           name="password"
           type="password"
+          placeholder="Enter your password"
         />
         {errors.password && (
           <p style={{ color: "red" }} className="text-xs">
