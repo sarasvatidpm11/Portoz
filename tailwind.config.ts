@@ -14,6 +14,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        "card-pattern": "url('/bg-card.svg')",
+      },
     },
   },
   plugins: [flowbite.plugin()],
