@@ -23,7 +23,7 @@ export default function LoginForm() {
 
   return (
     <div className="z-0 flex w-full items-center justify-center">
-      <Card className="md:w-[400px] lg:mt-12 xl:w-96">
+      <Card className="md:w-[450px] lg:mt-12 xl:w-96">
         <form
           action=""
           onSubmit={handleSubmit(onSubmit)}

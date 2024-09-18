@@ -2,11 +2,18 @@ import { Button } from "flowbite-react";
 
 export default function About() {
   return (
-    <div className="w-full bg-cyan-700 grid grid-cols-1 items-center py-10 gap-5 lg:grid-cols-2">
-      <div className="flex flex-col justify-center items-center px-5 lg:px-20 xl:px-48">
-        <h2 className="text-lg w-1/2 text-center font-semibold lg:text-2xl lg:w-3/4 xl:w-full">Edit Portofolio Sesuai Keinginan</h2>
-        <p className="text-xs text-center w-3/4 my-3 lg:text-lg lg:w-full">Tampil unggul dalam lamaran kerja dengan portofolio yang menarik. Edit portofolio sesuai keinginan dengan mudah.</p>
-        <Button className="bg-cyan-950 w-full font-semibold">Buat Portofolio Gratis</Button>
+    <div className="grid w-full grid-cols-1 items-center gap-5 bg-cyan-700 py-10 text-white lg:grid-cols-2">
+      <div className="flex flex-col items-center justify-center px-5 lg:px-20 xl:px-48">
+        <h2 className="w-1/2 text-center text-lg font-semibold lg:w-3/4 lg:text-2xl xl:w-full">
+          Edit Portofolio Sesuai Keinginan
+        </h2>
+        <p className="my-3 w-3/4 text-center text-xs lg:w-full lg:text-lg">
+          Tampil unggul dalam lamaran kerja dengan portofolio yang menarik. Edit
+          portofolio sesuai keinginan dengan mudah.
+        </p>
+        <Button className="w-full bg-cyan-950 font-semibold">
+          Buat Portofolio Gratis
+        </Button>
       </div>
       <div>
         <img

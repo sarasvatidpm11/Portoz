@@ -23,7 +23,7 @@ export default function RegisterForm() {
 
   return (
     <div className="z-10 flex w-full items-center justify-center lg:z-0">
-      <Card className="lg:mt-12 lg:w-[400px] xl:w-96">
+      <Card className="md:w-[500px] lg:mt-12 lg:w-[400px] xl:w-96">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
             <div className="block">
