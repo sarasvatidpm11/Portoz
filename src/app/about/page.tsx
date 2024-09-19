@@ -6,7 +6,7 @@ import Team from "@/components/about/Team";
 export default function About() {
   return (
     <>
-      <section className="my-16">
+      <section className="mb-16 mt-24">
         <JumbotronAbout />
       </section>
       <section className="my-16">

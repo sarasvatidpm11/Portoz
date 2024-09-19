@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 export default function About() {
   return (
     <div className="grid w-full grid-cols-1 items-center gap-5 bg-cyan-700 py-10 text-white lg:grid-cols-2">
-      <div className="flex flex-col items-center justify-center px-5 lg:px-20 xl:px-48">
+      <div className="flex flex-col items-center justify-center px-5 lg:px-20">
         <h2 className="w-1/2 text-center text-lg font-semibold lg:w-3/4 lg:text-2xl xl:w-full">
           Edit Portofolio Sesuai Keinginan
         </h2>

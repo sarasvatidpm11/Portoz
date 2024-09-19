@@ -6,11 +6,19 @@ import React from "react";
 
 export default function DashboardPage() {
   return (
-    <div>
-      <HeroSection />
-      <About />
-      <Service />
-      <FAQ />
-    </div>
+    <>
+      <section className="mb-16 mt-24">
+        <HeroSection />
+      </section>
+      <section className="my-16">
+        <About />
+      </section>
+      <section className="my-16">
+        <Service />
+      </section>
+      <section className="my-16">
+        <FAQ />
+      </section>
+    </>
   );
 }
